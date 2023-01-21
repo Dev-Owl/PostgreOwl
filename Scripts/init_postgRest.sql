@@ -2,6 +2,9 @@
 	!! README !!
 	Please change the password for jwt_secret and authenticator
 	The text between ONLY NEEDED ONCE BY SERVER will throw an error if run twice
+	Featuers:	
+	 - You can login with email and password using the authenticate function
+	 - You can get the current user id using current_userid function
 */
 
 -- Set your jwt secret
