@@ -7,16 +7,33 @@
 	 - You can get the current user id using current_userid function
 */
 
--- Set your jwt secret
 
+-- Set your jwt secret
 ALTER DATABASE ratte SET "app.jwt_secret" TO 'super_securesuper_securesuper_secure';
 
--- !! ONLY NEEDED ONCE BY SERVER !!
+-- !! BELOW ONLY NEEDED ONCE BY SERVER !!
 -- Create basic roles and connect users
+CREATE ROLE anon WITH
+	NOLOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1;
+
+CREATE ROLE authenticated WITH
+	NOLOGIN
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1;
 create role authenticator noinherit login password 'super_secure';
 grant anon to authenticator;
 grant authenticated to authenticator;
--- !! ONLY NEEDED ONCE BY SERVER !!
+-- !! ABOVE ONLY NEEDED ONCE BY SERVER !!
 
 -- Create schemas 
 CREATE SCHEMA IF NOT EXISTS extensions
